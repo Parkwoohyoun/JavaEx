@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class MapEx {
-	public void main(String args[]) {
+	public static void main(String args[]) {
 		
 		Random RandomGrad = new Random();
 		Map<String, Integer> GradPoint = new HashMap<>();
@@ -18,17 +18,17 @@ public class MapEx {
 		}
 		
 		// 1~100 번 학생 순서대로 출력
-		for(int i = 1; i <= 100; i++) {
-			System.out.println("학생"+ i + " 성적 = " + GradPoint.get("학생"+ i +"점"));
-		}
+//		for(int i = 1; i <= 100; i++) {
+//			System.out.println("학생"+ i + " 성적 = " + GradPoint.get("학생"+ i +"점"));
+//		}
 		
 //		
-//		Iterator<String> Key = GradPoint.keySet().iterator();
-//		while(Key.hasNext()) {
-//			String student = Key.next();
-//			System.out.print("키 : " + student);
-//			System.out.println(", 값 : " + GradPoint.get(student));
-//		}
+		Iterator<String> Key = GradPoint.keySet().iterator();
+		while(Key.hasNext()) {
+			String student = Key.next();
+			System.out.print("키 : " + student);
+			System.out.println(", 값 : " + GradPoint.get(student));
+		}
 		
 		Scanner Numsc = new Scanner(System.in);
 		

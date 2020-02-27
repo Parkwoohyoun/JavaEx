@@ -1,7 +1,12 @@
 package ioCode;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 public class StringToFile {
 	public static void main(String args[]) {
@@ -11,19 +16,26 @@ public class StringToFile {
 		
 		System.out.println(text);
 		
-		String fileName = "/temp/StringFile.txt";
+		File f = new File("/temp/StringFile.txt");
 
+		Writer output = null;
 		try {
-			OutputStream output = new FileOutputStream(fileName);
+			output = new BufferedWriter( new OutputStreamWriter( new FileOutputStream(f), "utf-8" ) );
 			
-			byte[] stringToByte = text.getBytes("utf-8");
-			output.write(stringToByte);
+			//byte[] stringToByte = text.getBytes("utf-8");
+			//output.write(stringToByte);
+			output.write(text);
 			
-			output.close();
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			StringToFile.close(output);
 		}
 		
 	}
 
+	public static void close(java.io.Closeable c) {
+		if( c != null ) try { c.close(); } catch (IOException e) { }
+	}
 }

@@ -26,10 +26,14 @@ public class NonBufferCopyFile {
 			
 			System.out.println("복사 시작");
 			
-			// inputStream 객체에서 1바이트씩 읽어서 버퍼에 담는다.
-			while((i = fis.read()) != -1) {
-				fos.write(i);
+			byte[] b = new byte[512];
+			while( (i = fis.read(b) ) != -1 ) {
+				fos.write(b, 0, i);
 			}
+			// inputStream 객체에서 1바이트씩 읽어서 버퍼에 담는다.
+			/*while((i = fis.read()) != -1) {
+				fos.write(i);
+			}*/
 			
 			long end = System.currentTimeMillis();
 			System.out.println("복사 끝");
