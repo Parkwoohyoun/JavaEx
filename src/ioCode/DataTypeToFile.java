@@ -11,7 +11,7 @@ public class DataTypeToFile {
 	@SuppressWarnings("resource")
 	public static void main(String args[]) throws IOException{
 		Random rd = new Random();
-		// °¢ ÀÚ·áÇü¿¡ ·£´ý °ª ÀÔ·Â
+		// ï¿½ï¿½ ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô·ï¿½
 		byte mByte = (byte) rd.nextInt();
 		short mShort = (short) rd.nextInt();
 		int mInt = rd.nextInt();
@@ -41,12 +41,10 @@ public class DataTypeToFile {
 		
 		System.out.println(dataType);
 		
-		File fileName = new File("/temp/DataType.data");
-		OutputStream fos = null;
+		File fileName = new File("/home/sntsoft/temp/DataType.txt");
 		DataOutputStream dos = null;
 		try {
-			fos = new FileOutputStream(fileName);
-			dos = new DataOutputStream(fos);
+			dos = new DataOutputStream( new FileOutputStream(fileName));
 			
 			dos.writeByte(mByte);
 			dos.writeShort(mShort);
@@ -58,14 +56,11 @@ public class DataTypeToFile {
 			dos.writeBoolean(mBoolean);
 //			fos.write(dataType.getBytes());
 			System.out.println(dos.size() + "Byte");
-			fos.close();
-			dos.close();
 //			System.out.println("exists 2 :"+file.exists());
 		}catch(Exception e) {
 			e.printStackTrace();
 //			e.getStackTrace();
 		}finally {
-			fos.close();
 			dos.close();
 		}
 	}

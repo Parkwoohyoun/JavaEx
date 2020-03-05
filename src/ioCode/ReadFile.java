@@ -13,11 +13,11 @@ import java.io.InputStreamReader;
 
 public class ReadFile {
 	public static void main(String args[]) throws IOException {
-		// ÆÄÀÏ°æ·Î¿Í ÀĞÀ» ÆÄÀÏ ÀÌ¸§ ÀúÀå
-		File dataTypeFilePath = new File("/temp/DataType.data");
-		File stringFilePath = new File("/temp/StringFile.txt");
+		// ï¿½ï¿½ï¿½Ï°ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+		File dataTypeFilePath = new File("/home/sntsoft/temp/DataType.txt");
+		File stringFilePath = new File("/home/sntsoft/temp/StringFile.txt");
 		
-		// InputStream °´Ã¼ »ı¼º
+		// InputStream ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 		InputStream dataFis = null;
 		InputStream txtFis = null;
 		DataInputStream dis = null;
@@ -36,7 +36,7 @@ public class ReadFile {
 //			BufferedInputStream dataBis = new BufferedInputStream(dataFis); 
 //			BufferedInputStream stringBis = new BufferedInputStream(stringFis);
 			
-			// InputStream °´Ã¼¿¡¼­ ÀĞÀ» ¼ö ÀÖ´Â ¹ÙÀÌÆ® ¼ö ÀúÀå
+			// InputStream ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //			int dataFileSize = dis.available();
 			int stringFileSize = txtFis.available();
 			
@@ -50,7 +50,7 @@ public class ReadFile {
 //			}
 
 
-			// ¹ÙÀÌÆ®·Î º¯È¯
+			// ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½È¯
 //			byte[] dataFileBuf = new byte[dis];
 			byte[] stringFileBuf = new byte[stringFileSize];
 			
@@ -58,20 +58,21 @@ public class ReadFile {
 //			dataFis.read(dataFileBuf);
 			txtFis.read(stringFileBuf);
 //			
-			System.out.println("ÀÚ·áÇüÀúÀå data ÆÄÀÏ");
-			System.out.println("byte = " + dis.readByte());
-			System.out.println("short = " + dis.readShort());
-			System.out.println("int = " + dis.readInt());
+			System.out.println("ê¸°ë³¸ ìë£Œí˜• data íŒŒì¼");
+			System.out.println("byte = " + Integer.toHexString(dis.readShort()));
+			System.out.println("short = " + Integer.toHexString(dis.readShort()));
+			System.out.println("int = " + Integer.toHexString(dis.readInt()));
+			System.out.println("long = " + Long.toHexString(dis.readLong()));
 			System.out.println("float = " + dis.readFloat());
 			System.out.println("double = " + dis.readDouble());
 			System.out.println("char = " + dis.readChar());
-			System.out.println("boolean = " + dis.readBoolean());
+//			System.out.println("boolean = " + dis.readBoolean());
 //			String dataString = new String(dataFileBuf,"utf-8");
 //			System.out.println(dataFileBuf);
 			
 			System.out.println("------------------------------------");
 			
-			System.out.println("½ºÆ®¸µÀúÀå txt ÆÄÀÏ");
+			System.out.println("ìŠ¤íŠ¸ë§ txt íŒŒì¼");
 			String stringString = new String(stringFileBuf,"utf-8");
 			System.out.println(stringString);
 					

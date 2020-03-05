@@ -10,13 +10,13 @@ import java.io.Writer;
 
 public class StringToFile {
 	public static void main(String args[]) {
-		String text = "½ÅÀÔ»ç¿ø ¹Ú¿ìÇö\nÀÚ¹ÙIOÄÚµå ÀÛ¼º\n°úÁ¦ ÀÛ¾÷ Áß ÀÔ´Ï´Ù.";
+		String text = "ì•ˆë…•í•˜ì„¸ìš”\nì‹ ì…ì‚¬ì›\në°•ìš°í˜„ ì…ë‹ˆë‹¤.";
 		String line = System.getProperty("line.separator");
 		text = text.replace("\n", line);
 		
 		System.out.println(text);
 		
-		File f = new File("/temp/StringFile.txt");
+		File f = new File("/home/sntsoft/temp/StringFile.txt");
 
 		Writer output = null;
 		try {
@@ -28,7 +28,6 @@ public class StringToFile {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			
 		}finally {
 			StringToFile.close(output);
 		}
