@@ -8,7 +8,7 @@ import java.net.Socket;
 // 익셉션 문제
 // 
 public class ServerEx {
-	public static void main(String[] args)throws IOException{
+	public static void main(String[] args){
 		try( ServerSocket ssk = new ServerSocket(8080) ){
 			System.out.println("Http Server started at 8080 port");
 
@@ -23,32 +23,61 @@ public class ServerEx {
 	                
 					is = sk.getInputStream();
 					os = sk.getOutputStream();
-
-					byte[] body = "안녕?".getBytes("utf-8");
 					
-					// 헤더 작성
-					os.write("HTTP/1.1 200 OK \r\n".getBytes("utf-8"));
-//					os.write("Content-Type: text/html;charset=utf-8\r\n".getBytes("utf-8"));
-					os.write("Content-Type: text/plain\r\n".getBytes("utf-8"));
-					os.write(("Content-Length: " + body.length + "\r\n").getBytes("utf-8"));
-					os.write("\r\n".getBytes("utf-8"));
-	                
-					byte[] b = new byte[512];
-					is.read(b);
+					// input
+//					int i = 0;
+//					byte[] b = new byte[512];
+//					while((i = is.read(b)) != -1) {
+//						os.write(b, 0, i);
+//					}
+
 
 					String a = new String(b,"utf-8");
 					System.out.println(a);
+
+					
+					// output
+					// 바디 작성
+					byte[] body = "안녕?".getBytes("utf-8");
+					
+					StringBuilder header = new StringBuilder("HTTP/1.1 200 OK \r\n");
+					header.append("Content-Type: text/plain\r\n")
+					.append("Content-Length: " + body.length + "\r\n")
+					.append("\r\n");
+					
+					String httpHeader = new String(header);
+					
+					// 헤더 작성
+					os.write(httpHeader.getBytes("utf-8"));
 						
 					os.write(body, 0, body.length);
 					os.write("\r\n".getBytes("utf-8"));
 					os.flush();
 					
 				} finally {
-					is.close();
-					os.close();
+					IOClose(is);
+					IOClose(os);
 				}
 			}
-		} 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void IOClose(InputStream is) {
+		try {
+			is.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void IOClose(OutputStream os) {
+		try {
+			os.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
+
 
