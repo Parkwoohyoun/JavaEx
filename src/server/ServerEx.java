@@ -1,5 +1,6 @@
 package server;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,9 +35,10 @@ public class ServerEx {
 				try( Socket sk = ssk.accept() ){
 					System.out.printf("New Client Connect! Connected IP : %s, Port : %d\n",
 							sk.getInetAddress(), sk.getPort());
-	                
+					                
 					is = sk.getInputStream();
 					os = sk.getOutputStream();
+					
 					
 //					"http://localhost:8080"
 //					URL url = new URL("http://localhost:8080");
@@ -54,16 +56,49 @@ public class ServerEx {
 //				   }
 
 
+					// bufferedReader로 한 라인읽고 개행문자를 이용해 첫 줄, 헤더, 바디를 분리하자.
+					// 네트웤 -1로 짜지 말자.
+					BufferedReader reader = new BufferedReader(new InputStreamReader(is,"utf-8"));
+					String readLine = reader.readLine();
 					
-					// input
-					int i = 0;
-					byte[] b = new byte[512];
-//					while((i = is.read(b)) != -1) {
-						is.read(b);
+					// 스트링 버퍼 httpMethod에 POST로 받아온 http 첫 줄 부분을 공백문자가 나올 때 까지 더한다.
+					StringBuffer httpMethod = new StringBuffer();
+					for(int i = 0; i < readLine.length(); i++) {
+						if(readLine.charAt(i) == ' ')
+							break;
+						httpMethod.append(readLine.charAt(i));
+					}
+					String httpM = new String(httpMethod);
+					
+					System.out.println("httpM = " + httpM);
+//					System.out.println("readLine = " + readLine);
+					
+					// POST요청인지 검사, POST라면 아래 코드 실행.
+//					 && reader.readLine() != "\r\n"
+					if(httpM.equals("POST")) {
+
+						while((readLine = reader.readLine()) != null) {
+							readLine = reader.readLine();
+							System.out.println(readLine);
+						}
+//						for(int i = 0; i < 20; i++) {
+//							readLine = reader.readLine();
+//							System.out.println(readLine);
+//						}
+					}
+//					int i = 0;
+//					while(i != -1) {
+//						byte[] body = new byte[reader.read()];
+//					
+//						String bod = new String(body);
+//						
+//						System.out.println(bod);
+//						i = reader.read();
 //					}
 
-					String a = new String(b,"utf-8");
-					System.out.println(a);
+
+//					String a = new String(b,"utf-8");
+//					System.out.println(a);
 
 					// output
 					// 바디 작성
