@@ -21,23 +21,11 @@ public class ReadFile {
 		InputStream dataFis = null;
 		InputStream txtFis = null;
 		DataInputStream dis = null;
-//		BufferedReader br = null;
 		try {
 			dataFis = new FileInputStream(dataTypeFilePath);
 			dis = new DataInputStream(dataFis);
 			txtFis = new FileInputStream(stringFilePath);
 			
-//			br = new BufferedReader( new InputStreamReader(dataFis, "utf-8") );
-//			StringBuffer sbf = new StringBuffer();
-//			String line = null; 
-//			while( (line = br.readLine() ) != null ) {
-//				sbf.append(line).append("\n");
-//			}
-//			BufferedInputStream dataBis = new BufferedInputStream(dataFis); 
-//			BufferedInputStream stringBis = new BufferedInputStream(stringFis);
-			
-			// InputStream ��ü���� ���� �� �ִ� ����Ʈ �� ����
-//			int dataFileSize = dis.available();
 			int stringFileSize = txtFis.available();
 			
 //			byte mByte = dis.readByte();
@@ -50,8 +38,6 @@ public class ReadFile {
 //			}
 
 
-			// ����Ʈ�� ��ȯ
-//			byte[] dataFileBuf = new byte[dis];
 			byte[] stringFileBuf = new byte[stringFileSize];
 			
 //			dataFis.read(dataFileBuf);

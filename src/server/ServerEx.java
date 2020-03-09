@@ -1,10 +1,22 @@
 package server;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Scanner;
+import javax.net.ssl.HttpsURLConnection;
+
+
+
 // 익셉션 문제
 // 
 public class ServerEx {
@@ -17,6 +29,8 @@ public class ServerEx {
 				InputStream is = null;
 				OutputStream os = null;
 				
+
+
 				try( Socket sk = ssk.accept() ){
 					System.out.printf("New Client Connect! Connected IP : %s, Port : %d\n",
 							sk.getInetAddress(), sk.getPort());
@@ -24,21 +38,38 @@ public class ServerEx {
 					is = sk.getInputStream();
 					os = sk.getOutputStream();
 					
-					// input
-//					int i = 0;
-//					byte[] b = new byte[512];
-//					while((i = is.read(b)) != -1) {
-//						os.write(b, 0, i);
-//					}
+//					"http://localhost:8080"
+//					URL url = new URL("http://localhost:8080");
+//				        
+//				   HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//				   conn.setRequestMethod("POST");
+//				   conn.setDoOutput(true);
+//				   
+//				   //응답
+//				   BufferedReader br = null;
+//				   br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+//				   String line = null;
+//				   while ((line = br.readLine()) != null) {
+//				    System.out.println(line);
+//				   }
 
+
+					
+					// input
+					int i = 0;
+					byte[] b = new byte[512];
+//					while((i = is.read(b)) != -1) {
+						is.read(b);
+//					}
 
 					String a = new String(b,"utf-8");
 					System.out.println(a);
 
-					
 					// output
 					// 바디 작성
 					byte[] body = "안녕?".getBytes("utf-8");
+//					if(str != null)
+//						body = str.getBytes("utf-8");
 					
 					StringBuilder header = new StringBuilder("HTTP/1.1 200 OK \r\n");
 					header.append("Content-Type: text/plain\r\n")
